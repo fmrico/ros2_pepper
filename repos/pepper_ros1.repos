@@ -451,3 +451,7 @@ repositories:
     type: git
     url: https://github.com/GT-RAIL/rosauth.git
     version: 8d2e768a824b66cc3bf8524a08a3f90d160b228c
+  rosbridge:
+    type: git
+    url: https://github.com/RobotWebTools/rosbridge_suite.git
+    version: master
