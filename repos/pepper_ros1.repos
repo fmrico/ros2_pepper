@@ -455,3 +455,89 @@ repositories:
     type: git
     url: https://github.com/RobotWebTools/rosbridge_suite.git
     version: master
+
+
+  navigation/costmap_2d:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: 5c1fbd25c63b0d0ad4d8c4fcabe0720e6d3a754e
+  navigation/clear_costmap_recovery:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: 9bf8f1595b18295a553e7ad0f48b35e7f6c22920
+  navigation/amcl:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: c4974da43451e7897f1c4abeac8bcace8025eafd
+  navigation/base_local_planner:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: a6e1682516ed5098facf5880e780c36e93c1a5f1
+  navigation/carrot_planner:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: 725ec1f14f7e9dac4c7d733a60f5d2e2479bc541
+  navigation/dwa_local_planner:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: 4244b02944ce3b8868a5ab1ca1b50157405e1a39
+  navigation/global_planner:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: 03fdea495038e7c7482da35560a0632aa2230ba7
+  navigation/move_base:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: 037d5f534c8acc96fae25babdd62f6e8bb370525
+  navigation/move_slow_and_clear:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: 05f0aabac8520988e7d9c786dfd7002d0bc0e80d
+  navigation/nav_core:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: c2da784c79fde3bd1f5e9e9f26bccc7f15c4aae4
+  navigation/navfn:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: 6b94fe79b91936a1302e0be335ea45b31ed33c34
+  navigation/navigation:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: 5a2630e2b85b874125a8188f84f02346063b2bf5
+  navigation/map_server:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: a538e89164f847cd06577eca3b531b6b4a0b093a
+  navigation/move_base_msgs:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: b14431881fe645768c35bdb98264f1578aacb86b
+  navigation/rotate_recovery:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: 798773715492e58e831143c9ce5bfa7546578d2a
+  navigation/voxel_grid:
+    type: git
+    url: https://github.com/ros-gbp/navigation-release.git
+    version: af9ba5ecf0db2a51e2a032cd419c59d51ee073d2
+  laser_geometry:
+    type: git
+    url: https://github.com/ros-gbp/laser_geometry-release.git
+    version: dd1ff641e05dd6997ea408b2cae819638f040f93
+  map_msgs:
+    type: git
+    url: https://github.com/ros-gbp/map_msgs-release.git
+    version: c01f54af4cc5839481395e5f7e5c4fb17c2a2d8d
+  pcl_conversions:
+    type: git
+    url: https://github.com/ros-gbp/pcl_conversions-release.git
+    version: 46e50ce2ba1ffe26d3fe736e3a1f720a2150ae53
+  perception_pcl/pcl_ros:
+    type: git
+    url: https://github.com/ros-gbp/perception_pcl-release.git
+    version: 973479d950167d41fefce84d4395d10ae641c1e3
+  pcl_msgs:
+    type: git
+    url: https://github.com/ros-gbp/pcl_msgs-release.git
+    version: 0c0b51104186098d10af31242d7438348a9057f9

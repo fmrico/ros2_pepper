@@ -65,6 +65,7 @@ docker run -it --rm \
       -DCMAKE_TOOLCHAIN_FILE=/home/nao/pepper_ros1_ws/ctc-cmake-toolchain.cmake \
       -DALDE_CTC_CROSS=/home/nao/ctc \
       -DCMAKE_PREFIX_PATH=\"/home/nao/${INSTALL_ROOT}/ros1_inst\" \
+      -DEIGEN_ROOT=${ALDE_CTC_CROSS}/eigen3 \
       -DCMAKE_FIND_ROOT_PATH=\"/home/nao/${INSTALL_ROOT}/Python-${PYTHON2_VERSION}-pepper;/home/nao/${INSTALL_ROOT}/ros1_dependencies;/home/nao/${INSTALL_ROOT}/ros1_inst;/home/nao/ctc\" \
     "
 cp ${PWD}/setup_ros1_pepper.bash ${PWD}/${INSTALL_ROOT}/setup_ros1_pepper.bash

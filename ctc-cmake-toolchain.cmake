@@ -32,6 +32,12 @@ if(" " STREQUAL "${ROS2_PEPPER} ")
   set(ROS2_PEPPER ${CMAKE_CURRENT_LIST_DIR})
 endif()
 
+set(INSTALL_ROOT $ENV{INSTALL_ROOT})
+if(" " STREQUAL "${INSTALL_ROOT} ")
+	set(INSTALL_ROOT "System")
+endif()
+
+
 set(Eigen3_DIR ${ROS2_PEPPER}/cmake CACHE INTERNAL "" FORCE)
 
 ##
@@ -192,6 +198,7 @@ set(_library_dirs
   -L${ALDE_CTC_CROSS}/zlib/lib \
   -L${ALDE_CTC_CROSS}/xz_utils/lib \
   -L${ALDE_CTC_CROSS}/openssl/lib \
+	-L/home/nao/${INSTALL_ROOT}/ros1_dependencies/lib \
   "
 )
 
@@ -210,6 +217,7 @@ set(Boost_NO_SYSTEM_PATHS ON CACHE INTERNAL "" FORCE)
 set(Boost_INCLUDE_DIR "${ALDE_CTC_CROSS}/boost/include" CACHE INTERNAL "" FORCE)
 set(Boost_PYTHON_FOUND 1 CACHE INTERNAL "" FORCE)
 set(Boost_PYTHON_LIBRARY "${ALDE_CTC_CROSS}/boost/lib/libboost_python-2.7.so" CACHE INTERNAL "" FORCE)
+set(BOOST_ROOT "${ALDE_CTC_CROSS}/boost/" CACHE INTERNAL "" FORCE)
 
 set(Boost_DEBUG 1 CACHE INTERNAL "" FORCE)
 set(Boost_DETAILED_FAILURE_MSG 1 CACHE INTERNAL "" FORCE)
@@ -234,7 +242,12 @@ set(TIFF_LIBRARY "${ALDE_CTC_CROSS}/tiff/lib/libtiff.so" CACHE INTERNAL "" FORCE
 set(TIFF_INCLUDE_DIR "${ALDE_CTC_CROSS}/tiff/include" CACHE INTERNAL "" FORCE)
 
 set(PNG_LIBRARY "${ALDE_CTC_CROSS}/png/lib/libpng.so" CACHE INTERNAL "" FORCE)
-set(PNG_PNG_INCLUDE_DIR "${ALDE_CTC_CROSS}/png/include" CACHE INTERNAL "" FORCE)
+set(PNG_INCLUDE_DIR "${ALDE_CTC_CROSS}/png/include" CACHE INTERNAL "" FORCE)
+
+set(YAML_CPP_LIBRARIES "/home/nao/${INSTALL_ROOT}/ros1_dependencies/lib/libyaml-cpp.so" CACHE INTERNAL "" FORCE)
+set(YAML_CPP_INCLUDE_DIR "/home/nao/${INSTALL_ROOT}/ros1_dependencies/include" CACHE INTERNAL "" FORCE)
+
+set(EIGEN_INCLUDE_DIR "${ALDE_CTC_CROSS}/eigen3/include/eigen3" CACHE INTERNAL "" FORCE)
 
 link_directories(${ALDE_CTC_CROSS}/boost/lib)
 link_directories(${ALDE_CTC_CROSS}/bzip2/lib)
@@ -258,6 +271,8 @@ link_directories(${ALDE_CTC_CROSS}/xz_utils/lib)
 link_directories(${ALDE_CTC_CROSS}/zlib/lib)
 link_directories(${ALDE_CTC_CROSS}/openssl/lib)
 
+include_directories(${ALDE_CTC_CROSS}/bzip2/include)
+include_directories(${ALDE_CTC_CROSS}/eigen3/include)
 set(_link_flags "")
 
 # NOTE(esteve): Workarounds for missing symbols in the CTC libraries (e.g. ICU in Boost.Regex)
@@ -334,7 +349,15 @@ elseif(
     "
   )
   elseif(
-        PROJECT_NAME STREQUAL "rosauth"
+  	  PROJECT_NAME STREQUAL "amcl"
+  )
+    set(_link_flags
+      "\
+      -lbz2 \
+      "
+    )
+  elseif(
+      PROJECT_NAME STREQUAL "rosauth"
 )
   include_directories(${ALDE_CTC_CROSS}/openssl/include)
   set(_link_flags
@@ -343,9 +366,20 @@ elseif(
     -lz \
     "
   )
+  elseif(
+  	  PROJECT_NAME STREQUAL "pcl_ros"
+  	)
+  	  set(_link_flags
+  	    "\
+  	    -lpcl_io_ply \
+        -lpng16 \
+  			-lbz2 \
+  			-lz \
+  	    "
+  	  )
 endif()
 
-set(EIGEN3_INCLUDE_DIR ${ALDE_CTC_CROSS}/eigen3/include/eigen3/ CACHE INTERNAL "" FORCE)
+set(EIGEN3_INCLUDE_DIR "${ALDE_CTC_CROSS}/eigen3/include/eigen3/" CACHE INTERNAL "" FORCE)
 set(EIGEN3_FOUND TRUE CACHE INTERNAL "" FORCE)
 
 set(CMAKE_EXE_LINKER_FLAGS "-Wl,--as-needed,--sysroot,${ALDE_CTC_SYSROOT}/ ${_link_flags}" CACHE INTERNAL "")
