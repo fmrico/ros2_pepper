@@ -19,7 +19,7 @@ We're going to use Docker to set up a container that will compile all the tools 
 1. Clone the project's repository
 
 ```
-$ git clone git clone https://github.com/esteve/ros2_pepper.git
+$ git clone git clone https://gitlab.com/Intelligent-Robotics/ros2_pepper.git
 $ cd ros2_pepper
 ```
 
@@ -67,7 +67,7 @@ We're going to copy these to the robot, assuming that your robot is connected to
 *Make sure you copy Python to the directory Python-2.7.13, without -pepper*
 
 ```
-$ scp -r .ros-root nao@IP_ADDRESS_OF_YOUR_ROBOT:.ros-root
+$ scp -r System nao@IP_ADDRESS_OF_YOUR_ROBOT:~/
 ```
 
 ### Run ROS from within Pepper
@@ -83,7 +83,7 @@ $ ssh nao@IP_ADDRESS_OF_YOUR_ROBOT
 *Source (not run) the setup script*
 
 ```
-$ source .ros-root/setup_ros1_pepper.bash
+$ source System/setup_ros1_pepper.bash
 ```
 
 *Start naoqi_driver, note that NETWORK\_INTERFACE may be either wlan0 or eth0, pick the appropriate interface if your robot is connected via wifi or ethernet*
