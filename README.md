@@ -62,12 +62,11 @@ By now you should have the following in the current directory:
 - A ROS workspace with ROS Kinetic built for Pepper (pepper\_ros1\_ws)
 - A helper script that will set up the ROS workspace in the robot
 
-We're going to copy these to the robot, assuming that your robot is connected to your network, type the following:
+We're going to copy these to the robot, assuming that your robot is connected to your network and you can ping your robot using pepper.local, type the following:
 
-*Make sure you copy Python to the directory Python-2.7.13, without -pepper*
 
 ```
-$ scp -r System nao@IP_ADDRESS_OF_YOUR_ROBOT:~/
+$ ./deploy_in_robot -s
 ```
 
 ### Run ROS from within Pepper
