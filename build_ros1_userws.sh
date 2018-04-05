@@ -47,7 +47,7 @@ if [ ! -d User ]; then
 fi
 
 if [ "$package" == ""  ]; then
-  cp -rf $workspace User
+  rsync -avzh $workspace User
 else
   package_option="--pkg $package"
 fi

@@ -463,16 +463,16 @@ repositories:
     version: 5c1fbd25c63b0d0ad4d8c4fcabe0720e6d3a754e
   navigation/clear_costmap_recovery:
     type: git
-    url: https://github.com/ros-gbp/navigation-release.git
-    version: 9bf8f1595b18295a553e7ad0f48b35e7f6c22920
+    url: https://github.com/jginesclavero/navigation-release.git
+    version: 647188ddc2640a1623330c5ffe4a13f821518dbc
   navigation/amcl:
     type: git
     url: https://github.com/ros-gbp/navigation-release.git
     version: c4974da43451e7897f1c4abeac8bcace8025eafd
   navigation/base_local_planner:
     type: git
-    url: https://github.com/ros-gbp/navigation-release.git
-    version: a6e1682516ed5098facf5880e780c36e93c1a5f1
+    url: https://github.com/jginesclavero/navigation-release.git
+    version: 107b2b4f93f804db1b7f1a6bd62c8bae4569caae
   navigation/carrot_planner:
     type: git
     url: https://github.com/ros-gbp/navigation-release.git
