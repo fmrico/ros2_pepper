@@ -4,7 +4,9 @@ set -euf -o pipefail
 
 PYTHON2_VERSION=2.7.13
 
-INSTALL_ROOT=System
+HOST_INSTALL_ROOT="${BASE_ROOT:-${PWD}}/"System
+PEPPER_INSTALL_ROOT=System
+
 
 if [ -z "$ALDE_CTC_CROSS" ]; then
   echo "Please define the ALDE_CTC_CROSS variable with the path to Aldebaran's Crosscompiler toolchain"
@@ -19,13 +21,13 @@ if [ ! -e "Python-${PYTHON2_VERSION}.tar.xz" ]; then
 fi
 
 mkdir -p ${PWD}/Python-${PYTHON2_VERSION}-host
-mkdir -p ${PWD}/${INSTALL_ROOT}/Python-${PYTHON2_VERSION}
+mkdir -p ${HOST_INSTALL_ROOT}/Python-${PYTHON2_VERSION}
 
 docker run -it --rm \
   -u $(id -u $USER) \
   -e PYTHON2_VERSION=${PYTHON2_VERSION} \
   -v ${PWD}/Python-${PYTHON2_VERSION}:/home/nao/Python-${PYTHON2_VERSION}-src \
-  -v ${PWD}/Python-${PYTHON2_VERSION}-host:/home/nao/${INSTALL_ROOT}/Python-${PYTHON2_VERSION} \
+  -v ${PWD}/Python-${PYTHON2_VERSION}-host:/home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON2_VERSION} \
   -v ${ALDE_CTC_CROSS}:/home/nao/ctc \
   -e CC \
   -e CPP \
@@ -46,36 +48,36 @@ docker run -it --rm \
     cd bzip2-1.0.6 && \
     make -f Makefile-libbz2_so && \
     make && \
-    make install PREFIX=/home/nao/${INSTALL_ROOT}/Python-${PYTHON2_VERSION} && \
+    make install PREFIX=/home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON2_VERSION} && \
     cd .. && \
     mkdir -p Python-${PYTHON2_VERSION}-src/build-host && \
     cd Python-${PYTHON2_VERSION}-src/build-host && \
-    export PATH=/home/nao/${INSTALL_ROOT}/Python-${PYTHON2_VERSION}/bin:$PATH && \
+    export PATH=/home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON2_VERSION}/bin:$PATH && \
     ../configure \
-      --prefix=/home/nao/${INSTALL_ROOT}/Python-${PYTHON2_VERSION} \
+      --prefix=/home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON2_VERSION} \
       --disable-ipv6 \
       ac_cv_file__dev_ptmx=yes \
       ac_cv_file__dev_ptc=no && \
-    export LD_LIBRARY_PATH=/home/nao/ctc/openssl/lib:/home/nao/ctc/zlib/lib:/home/nao/${INSTALL_ROOT}/Python-${PYTHON2_VERSION}/lib && \
+    export LD_LIBRARY_PATH=/home/nao/ctc/openssl/lib:/home/nao/ctc/zlib/lib:/home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON2_VERSION}/lib && \
     make -j4 install && \
-    wget -O - -q https://bootstrap.pypa.io/get-pip.py | /home/nao/${INSTALL_ROOT}/Python-${PYTHON2_VERSION}/bin/python && \
-    /home/nao/${INSTALL_ROOT}/Python-${PYTHON2_VERSION}/bin/pip install empy catkin-pkg setuptools vcstool numpy rospkg defusedxml netifaces Twisted"
+    wget -O - -q https://bootstrap.pypa.io/get-pip.py | /home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON2_VERSION}/bin/python && \
+    /home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON2_VERSION}/bin/pip install empy catkin-pkg setuptools vcstool numpy rospkg defusedxml netifaces Twisted"
 
 docker run -it --rm \
   -u $(id -u $USER) \
   -e PYTHON2_VERSION=${PYTHON2_VERSION} \
   -v ${PWD}/Python-${PYTHON2_VERSION}:/home/nao/Python-${PYTHON2_VERSION}-src \
-  -v ${PWD}/${INSTALL_ROOT}/Python-${PYTHON2_VERSION}:/home/nao/${INSTALL_ROOT}/Python-${PYTHON2_VERSION} \
+  -v ${HOST_INSTALL_ROOT}/Python-${PYTHON2_VERSION}:/home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON2_VERSION} \
   -v ${ALDE_CTC_CROSS}:/home/nao/ctc \
   ros1-pepper \
   bash -c "\
     set -euf -o pipefail && \
     mkdir -p Python-${PYTHON2_VERSION}-src/build-pepper && \
     cd Python-${PYTHON2_VERSION}-src/build-pepper && \
-    export LD_LIBRARY_PATH=/home/nao/ctc/openssl/lib:/home/nao/ctc/zlib/lib:/home/nao/${INSTALL_ROOT}/Python-${PYTHON2_VERSION}/lib && \
-    export PATH=/home/nao/${INSTALL_ROOT}/Python-${PYTHON2_VERSION}/bin:$PATH && \
+    export LD_LIBRARY_PATH=/home/nao/ctc/openssl/lib:/home/nao/ctc/zlib/lib:/home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON2_VERSION}/lib && \
+    export PATH=/home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON2_VERSION}/bin:$PATH && \
     ../configure \
-      --prefix=/home/nao/${INSTALL_ROOT}/Python-${PYTHON2_VERSION} \
+      --prefix=/home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON2_VERSION} \
       --host=i686-aldebaran-linux-gnu \
       --build=x86_64-linux \
       --enable-shared \
@@ -83,8 +85,8 @@ docker run -it --rm \
       ac_cv_file__dev_ptmx=yes \
       ac_cv_file__dev_ptc=no && \
     make -j4 install && \
-    wget -O - -q https://bootstrap.pypa.io/get-pip.py | /home/nao/${INSTALL_ROOT}/Python-${PYTHON2_VERSION}/bin/python && \
-    /home/nao/${INSTALL_ROOT}/Python-${PYTHON2_VERSION}/bin/pip install empy catkin-pkg setuptools vcstool numpy rospkg defusedxml netifaces pymongo image && \
+    wget -O - -q https://bootstrap.pypa.io/get-pip.py | /home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON2_VERSION}/bin/python && \
+    /home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON2_VERSION}/bin/pip install empy catkin-pkg setuptools vcstool numpy rospkg defusedxml netifaces pymongo image && \
     cd .. && \
     wget https://twistedmatrix.com/Releases/Twisted/16.0/Twisted-16.0.0.tar.bz2 && \
     tar -xjvf Twisted-16.0.0.tar.bz2 && \

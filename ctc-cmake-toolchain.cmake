@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.5)
+
 ## Based on Aldebaran's CTC toolchain
 ## Copyright (C) 2011-2014 Aldebaran
 
@@ -32,7 +34,7 @@ if(" " STREQUAL "${ROS2_PEPPER} ")
   set(ROS2_PEPPER ${CMAKE_CURRENT_LIST_DIR})
 endif()
 
-set(INSTALL_ROOT $ENV{INSTALL_ROOT})
+set(INSTALL_ROOT $ENV{PEPPER_INSTALL_ROOT})
 if(" " STREQUAL "${INSTALL_ROOT} ")
 	set(INSTALL_ROOT "System")
 endif()
@@ -90,7 +92,9 @@ list(APPEND CMAKE_PREFIX_PATH ${ALDE_CTC_SYSROOT})
 if(NOT CMAKE_FIND_ROOT_PATH)
  set(CMAKE_FIND_ROOT_PATH)
 endif()
-list(INSERT CMAKE_FIND_ROOT_PATH 0  "${ALDE_CTC_SYSROOT}")
+if(NOT "${ALDE_CTC_SYSROOT}" IN_LIST CMAKE_FIND_ROOT_PATH)
+  list(INSERT CMAKE_FIND_ROOT_PATH 0  "${ALDE_CTC_SYSROOT}")
+endif()
 
 # search for programs in the build host directories
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM BOTH)
@@ -198,7 +202,7 @@ set(_library_dirs
   -L${ALDE_CTC_CROSS}/zlib/lib \
   -L${ALDE_CTC_CROSS}/xz_utils/lib \
   -L${ALDE_CTC_CROSS}/openssl/lib \
-	-L/home/nao/${INSTALL_ROOT}/ros1_dependencies/lib \
+  -L/home/nao/${INSTALL_ROOT}/ros1_dependencies/lib \
   "
 )
 
@@ -270,9 +274,14 @@ link_directories(${ALDE_CTC_CROSS}/vorbis/lib)
 link_directories(${ALDE_CTC_CROSS}/xz_utils/lib)
 link_directories(${ALDE_CTC_CROSS}/zlib/lib)
 link_directories(${ALDE_CTC_CROSS}/openssl/lib)
+link_directories(/home/nao/${INSTALL_ROOT}/ros1_dependencies/lib)
 
 include_directories(${ALDE_CTC_CROSS}/bzip2/include)
 include_directories(${ALDE_CTC_CROSS}/eigen3/include)
+
+include_directories(${ALDE_CTC_CROSS}/openssl/include)
+include_directories(/home/nao/${INSTALL_ROOT}/ros1_dependencies/include)
+
 set(_link_flags "")
 
 # NOTE(esteve): Workarounds for missing symbols in the CTC libraries (e.g. ICU in Boost.Regex)
@@ -282,6 +291,7 @@ if(
   PROJECT_NAME STREQUAL "rosbag" OR
   PROJECT_NAME STREQUAL "rosconsole_bridge" OR
   PROJECT_NAME STREQUAL "image_transport" OR
+  PROJECT_NAME STREQUAL "camera_calibration_parsers" OR
   PROJECT_NAME STREQUAL "diagnostic_updater" OR
   PROJECT_NAME STREQUAL "tf2_ros" OR
   PROJECT_NAME STREQUAL "tf" OR
@@ -349,34 +359,19 @@ elseif(
     "
   )
   elseif(
-  	  PROJECT_NAME STREQUAL "amcl"
-  )
-    set(_link_flags
-      "\
-      -lbz2 \
-      "
-    )
-  elseif(
-      PROJECT_NAME STREQUAL "rosauth"
-)
-  include_directories(${ALDE_CTC_CROSS}/openssl/include)
-  set(_link_flags
-    "\
-    -lcrypto \
-    -lz \
-    "
-  )
-  elseif(
-  	  PROJECT_NAME STREQUAL "pcl_ros"
-  	)
-  	  set(_link_flags
-  	    "\
-  	    -lpcl_io_ply \
-        -lpng16 \
-  			-lbz2 \
-  			-lz \
-  	    "
-  	  )
+       PROJECT_NAME STREQUAL "rosauth"
+   )
+   set(_link_flags
+     "\
+     -licudata \
+     -licui18n \
+     -licuuc \
+     -lcrypto \
+     -lz \
+     "
+     )
+   include_directories(${ALDE_CTC_CROSS}/openssl/include)
+
 endif()
 
 set(EIGEN3_INCLUDE_DIR "${ALDE_CTC_CROSS}/eigen3/include/eigen3/" CACHE INTERNAL "" FORCE)
