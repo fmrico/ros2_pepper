@@ -74,7 +74,8 @@ We're going to copy these to the robot, assuming that your robot is connected to
 
 
 ```
-$ ./deploy_in_robot -s
+$ ln -s deploy_in_robot.sh ../
+$ ./deploy_in_robot.sh -s
 ```
 
 ### Run ROS from within Pepper
@@ -90,7 +91,7 @@ $ ssh nao@IP_ADDRESS_OF_YOUR_ROBOT
 *Source (not run) the setup script*
 
 ```
-$ source System/setup_ros1_pepper.bash
+$ source System/setup.bash
 ```
 
 *Start naoqi_driver, note that NETWORK\_INTERFACE may be either wlan0 or eth0, pick the appropriate interface if your robot is connected via wifi or ethernet*
