@@ -76,7 +76,7 @@ We're going to copy these to the robot, assuming that your robot is connected to
 ```
 $ ln -s deploy_in_robot.sh ../
 $ cd ..
-$ ./deploy_in_robot.sh -s
+$ ./deploy_in_robot.sh [-sun (System, User, naoqi)] -- To the first deploy use -sun option
 ```
 
 ### Run ROS from within Pepper
