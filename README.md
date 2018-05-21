@@ -75,6 +75,7 @@ We're going to copy these to the robot, assuming that your robot is connected to
 
 ```
 $ ln -s deploy_in_robot.sh ../
+$ cd ..
 $ ./deploy_in_robot.sh -s
 ```
 
