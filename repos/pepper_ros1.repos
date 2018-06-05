@@ -125,7 +125,7 @@ repositories:
     version: e25d4dc6b0e1cb5406be183cd9c486086a41dc82
   naoqi_driver:
     type: git
-    url: https://github.com/esteve/naoqi_driver.git
+    url: https://github.com/fmrico/naoqi_driver.git
     version: bz2-cmake
   naoqi_libqi:
     type: git
@@ -202,7 +202,7 @@ repositories:
   ros_comm/roslaunch:
     type: git
     url: https://github.com/ros-gbp/ros_comm-release.git
-    version: a39b56de2a96e01ce0b254eabc5e2dbfe17b8802
+    version: 37e187b3569354832cf8db94c2457a49351c9576
   ros_comm/roslz4:
     type: git
     url: https://github.com/ros-gbp/ros_comm-release.git
@@ -422,7 +422,7 @@ repositories:
   ros/rosbash:
     type: git
     url: https://github.com/fmrico/ros-release.git
-    version: 4ee70fc826dc7e50b5604a63950efee59b9dbfb2
+    version: 255f881d27ff70cc1690a4c7fee9546a7107298e
   roslint:
     type: git
     url: https://github.com/ros-gbp/roslint-release.git
