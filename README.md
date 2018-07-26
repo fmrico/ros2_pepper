@@ -15,22 +15,18 @@ export ALDE_CTC_CROSS=$AL_DIR/ctc-linux64-atom-2.5.2.74
 
 We're going to use Docker to set up a container that will compile all the tools for cross-compiling ROS and all of its dependencies. Go to https://https://www.docker.com/community-edition to download it and install it for your Linux distribution.
 
-0. Add your user to docker group and reboot.
+1. Add your user to docker group and reboot
 ```
 $ sudo usermod -aG docker $USER
 $ sudo reboot -h now
 ```
-
-1. Create a directory containing all Pepper projects, and set BASE_ROOT env to this directory
-
+2. Create a directory containing all Pepper projects, and set BASE_ROOT env to this directory
 ```
 $ mkdir ~/pepper_root
 $ export BASE_ROOT=${HOME}/pepper_root/
 $ cd pepper_root
 ```
-
-2. Clone the project's repository, setting MAIN_ROOT
-
+3. Clone the project's repository, setting MAIN_ROOT
 ```
 $ git clone git clone https://gitlab.com/Intelligent-Robotics/ros2_pepper.git
 $ export MAIN_ROOT=${BASE_ROOT}/ros2_pepper/
