@@ -23,14 +23,18 @@ $ sudo reboot -h now
 2. Create a directory containing all Pepper projects, and set BASE_ROOT env to this directory
 ```
 $ mkdir ~/pepper_root
-$ export BASE_ROOT=${HOME}/pepper_root/
+$ echo 'export BASE_ROOT=${HOME}/pepper_root/' > ~/.bashrc
 $ cd pepper_root
 ```
 3. Clone the project's repository, setting MAIN_ROOT
 ```
 $ git clone git clone https://gitlab.com/Intelligent-Robotics/ros2_pepper.git
-$ export MAIN_ROOT=${BASE_ROOT}/ros2_pepper/
+$ echo 'export MAIN_ROOT=${BASE_ROOT}/ros2_pepper/' > ~/.bashrc
 $ cd ros2_pepper
+```
+4. Reload .bashrc
+```
+$ source ~/.bashrc
 ```
 
 ### Prepare the requirements for ROS
