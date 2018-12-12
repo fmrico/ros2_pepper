@@ -43,7 +43,7 @@ docker run -it --rm \
   ros1-pepper \
   bash -c "\
     set -euf -o pipefail && \
-    wget https://github.com/dvargasfr/dvargasfr.github.io/raw/master/bzip2-1.0.6/bzip2-1.0.6.tar.gz && \
+    wget https://github.com/dvargasfr/artifacts/raw/master/bzip2-1.0.6/bzip2-1.0.6.tar.gz && \
     tar -xvf bzip2-1.0.6.tar.gz && \
     cd bzip2-1.0.6 && \
     make -f Makefile-libbz2_so && \
