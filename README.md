@@ -28,7 +28,7 @@ $ cd pepper_root
 ```
 3. Clone the project's repository, setting MAIN_ROOT
 ```
-$ git clone git clone https://gitlab.com/Intelligent-Robotics/ros2_pepper.git
+$ git clone https://gitlab.com/Intelligent-Robotics/ros2_pepper.git
 $ echo 'export MAIN_ROOT=${BASE_ROOT}/ros2_pepper/' >> ~/.bashrc
 $ cd ros2_pepper
 ```
