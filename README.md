@@ -80,8 +80,8 @@ We're going to copy these to the robot, assuming that your robot is connected to
 
 
 ```
-$ ln -s deploy_in_robot.sh ../
-$ cd ..
+$ cd ~/pepper_root
+$ ln -s ros2_pepper/deploy_in_robot.sh .
 $ ./deploy_in_robot.sh [-sun (System, User, naoqi)] -- To the first deploy use -sun option
 ```
 
