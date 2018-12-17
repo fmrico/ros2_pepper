@@ -7,7 +7,7 @@ This project contains a set of patches and scripts to compile and run ROS 1 ROS 
 Download and extract the [NaoQi C++ framework](http://doc.aldebaran.com/2-5/index_dev_guide.html) and Softbanks's crosstool chain and point the `AL_DIR` and `ALDE_CTC_CROSS` environment variables to their respective paths:
 
 ```
-export AL_DIR=/home/NaoQi  <-- Or wherever you installed NaoQi
+export AL_DIR=/home/${USER}/NaoQi  <-- Or wherever you installed NaoQi
 export ALDE_CTC_CROSS=$AL_DIR/ctc-linux64-atom-2.5.2.74
 ```
 
