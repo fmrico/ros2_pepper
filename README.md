@@ -7,13 +7,13 @@ This project contains a set of patches and scripts to compile and run ROS 1 ROS 
 Download and extract the [NaoQi C++ framework](http://doc.aldebaran.com/2-5/index_dev_guide.html) and Softbanks's crosstool chain and point the `AL_DIR` and `ALDE_CTC_CROSS` environment variables to their respective paths:
 
 ```
-export AL_DIR=/home/NaoQi  <-- Or wherever you installed NaoQi
+export AL_DIR=/home/${USER}/NaoQi  <-- Or wherever you installed NaoQi
 export ALDE_CTC_CROSS=$AL_DIR/ctc-linux64-atom-2.5.2.74
 ```
 
 ## Prepare cross-compiling environment
 
-We're going to use Docker to set up a container that will compile all the tools for cross-compiling ROS and all of its dependencies. Go to https://https://www.docker.com/community-edition to download it and install it for your Linux distribution.
+We're going to use Docker to set up a container that will compile all the tools for cross-compiling ROS and all of its dependencies. Go to https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository to install it for your Linux distribution.
 
 1. Add your user to docker group and reboot
 ```
@@ -23,13 +23,13 @@ $ sudo reboot -h now
 2. Create a directory containing all Pepper projects, and set BASE_ROOT env to this directory
 ```
 $ mkdir ~/pepper_root
-$ echo 'export BASE_ROOT=${HOME}/pepper_root/' > ~/.bashrc
+$ echo 'export BASE_ROOT=${HOME}/pepper_root/' >> ~/.bashrc
 $ cd pepper_root
 ```
 3. Clone the project's repository, setting MAIN_ROOT
 ```
-$ git clone git clone https://gitlab.com/Intelligent-Robotics/ros2_pepper.git
-$ echo 'export MAIN_ROOT=${BASE_ROOT}/ros2_pepper/' > ~/.bashrc
+$ git clone https://gitlab.com/Intelligent-Robotics/ros2_pepper.git
+$ echo 'export MAIN_ROOT=${BASE_ROOT}/ros2_pepper/' >> ~/.bashrc
 $ cd ros2_pepper
 ```
 4. Reload .bashrc
@@ -80,8 +80,8 @@ We're going to copy these to the robot, assuming that your robot is connected to
 
 
 ```
-$ ln -s deploy_in_robot.sh ../
-$ cd ..
+$ cd ~/pepper_root
+$ ln -s ros2_pepper/deploy_in_robot.sh .
 $ ./deploy_in_robot.sh [-sun (System, User, naoqi)] -- To the first deploy use -sun option
 ```
 
