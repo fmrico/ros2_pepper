@@ -13,7 +13,7 @@ export ALDE_CTC_CROSS=$AL_DIR/ctc-linux64-atom-2.5.2.74
 
 ## Prepare cross-compiling environment
 
-We're going to use Docker to set up a container that will compile all the tools for cross-compiling ROS and all of its dependencies. Go to https://https://www.docker.com/community-edition to download it and install it for your Linux distribution.
+We're going to use Docker to set up a container that will compile all the tools for cross-compiling ROS and all of its dependencies. Go to https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository to install it for your Linux distribution.
 
 1. Add your user to docker group and reboot
 ```
