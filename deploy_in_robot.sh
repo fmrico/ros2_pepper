@@ -2,7 +2,7 @@
 system=0
 user=0
 naoqi=0
-help="Use [s] option to deploy System dir and [u] option to deploy User dir, ./deploy_in_robot.sh -[s,u]"
+help="Use [s] option to deploy System dir, [u] option to deploy User dir and [n] to deploy Naoqi, ./deploy_in_robot.sh -[s,u,n]"
 while getopts ":hsun" opt; do
     case "$opt" in
     s)
@@ -25,7 +25,7 @@ if [ "$user" == 1 ]; then
   rsync -avzh ./User nao@pepper.local:~/
 fi
 if [ "$naoqi" == 1 ]; then
-  naoqi_dir=$(find . -type d -name 'naoqi')
+  naoqi_dir=$(find ./User -type d -name 'naoqi')
   rsync -avzh $naoqi_dir nao@pepper.local:~/
 fi
 if [ "$system" == 0 ] && [ "$user" == 0 ] && [ "$naoqi" == 0 ]; then
