@@ -10,7 +10,7 @@ repositories:
   flann:
     type: git
     url: https://github.com/mariusmuja/flann.git
-    version: master
+    version: 1.9.1
   pcl:
     type: git
     url: https://github.com/PointCloudLibrary/pcl.git
