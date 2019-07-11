@@ -11,6 +11,10 @@ repositories:
     type: git
     url: https://github.com/ros-gbp/catkin-release.git
     version: 716fe09b957a07ac1632ce96f8e3cff8ef6d9374
+  checkstartup:
+    type: git
+    url: https://gitlab.com/Jgines/checkstartup.git
+    version: branch_1
   class_loader:
     type: git
     url: https://github.com/ros-gbp/class_loader-release.git
