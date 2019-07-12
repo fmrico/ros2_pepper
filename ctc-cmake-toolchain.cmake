@@ -307,7 +307,8 @@ if(
   )
 elseif(
   PROJECT_NAME STREQUAL "naoqi_driver" OR
-  PROJECT_NAME STREQUAL "image_proc"
+  PROJECT_NAME STREQUAL "image_proc" OR
+  PROJECT_NAME STREQUAL "checkstartup"
 )
   set(_link_flags
     "\
