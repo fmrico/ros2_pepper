@@ -7,20 +7,34 @@ This project contains a set of patches and scripts to compile and run ROS 1 and 
 Download and extract the [NaoQi C++ framework](http://doc.aldebaran.com/2-5/index_dev_guide.html) and Softbanks's crosstool chain and point the `AL_DIR` and `ALDE_CTC_CROSS` environment variables to their respective paths:
 
 ```
-export AL_DIR=/home/NaoQi  <-- Or wherever you installed NaoQi
+export AL_DIR=/home/${USER}/NaoQi  <-- Or wherever you installed NaoQi
 export ALDE_CTC_CROSS=$AL_DIR/ctc-linux64-atom-2.5.2.74
 ```
 
 ## Prepare cross-compiling environment
 
-We're going to use Docker to set up a container that will compile all the tools for cross-compiling ROS and all of its dependencies. Go to https://https://www.docker.com/community-edition to download it and install it for your Linux distribution.
+We're going to use Docker to set up a container that will compile all the tools for cross-compiling ROS and all of its dependencies. Go to https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository to install it for your Linux distribution.
 
-
-1. Clone the project's repository
-
+1. Add your user to docker group and reboot
 ```
-$ git clone git clone https://github.com/esteve/ros2_pepper.git
+$ sudo usermod -aG docker $USER
+$ sudo reboot -h now
+```
+2. Create a directory containing all Pepper projects, and set BASE_ROOT env to this directory
+```
+$ mkdir ~/pepper_root
+$ echo 'export BASE_ROOT=${HOME}/pepper_root/' >> ~/.bashrc
+$ cd pepper_root
+```
+3. Clone the project's repository, setting MAIN_ROOT
+```
+$ git clone https://gitlab.com/Intelligent-Robotics/ros2_pepper.git
+$ echo 'export MAIN_ROOT=${BASE_ROOT}/ros2_pepper/' >> ~/.bashrc
 $ cd ros2_pepper
+```
+4. Reload .bashrc
+```
+$ source ~/.bashrc
 ```
 
 ## ROS 1
@@ -64,10 +78,12 @@ By now you should have the following inside .ros-root in the current directory:
 - A ROS workspace with ROS Kinetic built for Pepper (.ros-root/ros1_inst)
 - A helper script that will set up the ROS workspace in the robot (.ros-root/setup_ros1_pepper.bash)
 
-We're going to copy these to the robot, assuming that your robot is connected to your network, type the following:
+We're going to copy these to the robot, assuming that your robot is connected to your network and you can ping your robot using pepper.local, type the following:
 
 ```
-$ scp -r .ros-root nao@IP_ADDRESS_OF_YOUR_ROBOT:.ros-root
+$ cd ~/pepper_root
+$ ln -s ros2_pepper/deploy_in_robot.sh .
+$ ./deploy_in_robot.sh [-sun (System, User, naoqi)] -- To the first deploy use -sun option
 ```
 
 ### Run ROS 1 from inside Pepper
@@ -83,7 +99,7 @@ $ ssh nao@IP_ADDRESS_OF_YOUR_ROBOT
 *Source (not run) the setup script*
 
 ```
-$ source .ros-root/setup_ros1_pepper.bash
+$ source System/setup.bash
 ```
 
 *Start naoqi_driver, note that NETWORK\_INTERFACE may be either wlan0 or eth0, pick the appropriate interface if your robot is connected via wifi or ethernet*

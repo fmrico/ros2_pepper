@@ -1,5 +1,8 @@
 #!/bin/bash
 
+HOST_INSTALL_ROOT="${BASE_ROOT:-${PWD}}/"System
+PEPPER_INSTALL_ROOT=System
+
 set -euf -o pipefail
 
 PYTHON3_VERSION=3.6.1
@@ -25,6 +28,7 @@ mkdir -p ${HOST_INSTALL_ROOT}/Python-${PYTHON3_VERSION}
 
 docker run -it --rm \
   -u $(id -u $USER) \
+  -e PEPPER_INSTALL_ROOT=${PEPPER_INSTALL_ROOT} \
   -e PYTHON3_VERSION=${PYTHON3_VERSION} \
   -v ${PWD}/ccache-build:/home/nao/.ccache \
   -v ${PWD}/Python-${PYTHON3_VERSION}:/home/nao/Python-${PYTHON3_VERSION}-src \
@@ -46,7 +50,7 @@ docker run -it --rm \
     set -euf -o pipefail && \
     mkdir -p Python-${PYTHON3_VERSION}-src/build-host && \
     cd Python-${PYTHON3_VERSION}-src/build-host && \
-    export PATH=/home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON3_VERSION}/bin:${PATH} && \
+    export PATH=/home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON3_VERSION}/bin:\${PATH} && \
     ../configure \
       --prefix=/home/nao/${PEPPER_INSTALL_ROOT}/Python-${PYTHON3_VERSION} \
       --enable-shared \
