@@ -130,7 +130,7 @@ repositories:
   naoqi_driver:
     type: git
     url: https://github.com/fmrico/naoqi_driver.git
-    version: bz2-cmake
+    version: al_motion_controller
   naoqi_libqi:
     type: git
     url: https://github.com/esteve/libqi-release.git
